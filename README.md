@@ -1,32 +1,64 @@
 # MOOD — Expression Lab
 
-A static browser app using face-api.js for real face detection and facial-expression classification, with both continuous live webcam analysis and one-photo analysis.
+An interactive browser-based experience for real-time facial detection and facial-expression classification, built with **JavaScript and face-api.js**.
 
-## Run locally (Windows / VS Code)
+MOOD combines browser-based machine learning with generative visuals to explore how facial-expression estimates can drive a visual experience.
 
-1. Extract this folder.
-2. Open it in VS Code.
-3. Install the free **Live Server** extension, or use another local HTTP server.
-4. Right-click `index.html` → **Open with Live Server**.
-5. Click **Start camera** and grant camera permission, or choose **Choose photo** to select an image.
-6. Use **Change visual style** to cycle the artwork treatment, or **Save visual** to download the current generative visual as an SVG.
+## Features
 
-Do not open the file using `file://` if webcam access is blocked. Use `http://localhost` or HTTPS.
+- **Live camera analysis** — continuously analyzes webcam frames for faces and facial expressions.
+- **Photo analysis** — select an image to run facial detection and expression classification.
+- **Generative visuals** — explore different visual treatments inspired by the model's output.
+- **SVG export** — save the current generated visual as an SVG file.
+- **Browser-based processing** — webcam frames and selected photos are processed locally in the browser.
 
-## What runs where
+## Tech Stack
 
-- Webcam frames and selected photos are processed in the browser using face-api.js.
-- The Tiny Face Detector and Face Expression model files are downloaded from jsDelivr on first use.
-- No backend, API key, account, image upload, or recording feature is included.
-- Internet access is needed to load the library and model weights.
+- HTML
+- CSS
+- JavaScript
+- face-api.js
+- Tiny Face Detector
+- Face Expression Recognition model
 
-## Model output
+## Run Locally
 
-The model estimates seven facial-expression categories: neutral, happy, sad, angry, fearful, disgusted, and surprised. Its scores are model outputs, not calibrated probabilities and not reliable measurements of a person's internal emotional state. Lighting, head pose, occlusion, cultural differences, and individual differences can affect results.
+1. Clone or download this repository.
+2. Open the project folder in VS Code.
+3. Install the free **Live Server** extension, or start another local HTTP server.
+4. Open `index.html` using Live Server.
+5. Click **Start camera** and grant camera permission, or select **Choose photo**.
+6. Use **Change visual style** to explore the artwork treatments, or **Save visual** to export the current visual as SVG.
 
-## Known limitations
+Use `http://localhost` or HTTPS rather than opening the page through `file://` if browser permissions prevent camera access.
 
-- Browser inference performance varies by device.
-- CDN/model availability can change; production deployment should pin and self-host reviewed library/model assets with appropriate license notices.
-- This prototype is not intended for clinical, hiring, surveillance, identity, or other consequential decisions.
-- A production product should add explicit privacy/consent UX, accessibility testing, performance testing, and user validation.
+## How It Works
+
+- The application uses face-api.js to detect faces and estimate facial-expression categories.
+- The Tiny Face Detector and Face Expression model weights are loaded from jsDelivr when needed.
+- Inference runs in the browser; no application backend or API key is required.
+- An internet connection is required to load the JavaScript library and model files.
+
+## Expression Categories
+
+The model estimates seven categories:
+
+`Neutral` · `Happy` · `Sad` · `Angry` · `Fearful` · `Disgusted` · `Surprised`
+
+These outputs are model estimates, not calibrated probabilities or reliable measurements of a person's internal emotional state. Results may vary with lighting, head pose, occlusion, and individual differences.
+
+## Privacy & Responsible Use
+
+- Webcam frames and selected photos are processed in the browser.
+- The prototype does not include a backend, image-upload service, or recording feature.
+- This project is not intended for clinical diagnosis, hiring decisions, surveillance, identity verification, or other consequential decisions.
+
+## Limitations & Future Improvements
+
+- Inference performance depends on the user's device and browser.
+- The application depends on third-party CDN and model availability.
+- A production release should review licensing, pin and self-host dependencies where appropriate, and include accessibility, performance, privacy, and consent testing.
+
+## Project Status
+
+A browser-based prototype exploring the intersection of machine learning, interactive design, and generative visual experiences.
