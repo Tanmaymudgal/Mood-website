@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#e8e5dc">
+<title>MOOD | Expression Lab</title>
+<style>:root{color-scheme:light;--paper:#e8e5dc;--ink:#191917;--muted:#77766f;--line:#c8c5bb;--acid:#d9ff56;--blue:#5650ff;--serif:Georgia,"Times New Roman",serif;--sans:Arial,Helvetica,sans-serif;--mono:"Courier New",monospace}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse at 18% 9%,#fff9,transparent 28%),linear-gradient(90deg,#4c473e08 1px,transparent 1px),linear-gradient(#4c473e08 1px,transparent 1px),var(--paper);background-size:auto,34px 34px,34px 34px,auto;color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased}button{font:inherit;cursor:pointer}button:focus-visible{outline:3px solid var(--blue);outline-offset:3px}.shell{width:min(1440px,calc(100% - 88px));margin:auto}
+header{height:76px;border-bottom:1px solid var(--line)}.brand{font:700 15px var(--sans);letter-spacing:.06em}.brand::before{content:"";width:20px;height:20px;display:inline-block;margin-right:12px;border-radius:50% 50% 48% 12%;background:var(--blue);transform:rotate(-35deg);box-shadow:inset -5px -3px 0 #211ba4}.mark{display:none}.topmeta{font:10px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:#4a4944}.topmeta::before{content:"FIELD NOTES / 01";margin-right:24px;color:var(--muted)}
+.hero{display:grid;grid-template-columns:1.55fr .45fr;align-items:end;gap:30px;padding:64px 0 48px;text-align:left}.eyebrow,.panel-title,.small-label{font:10px var(--mono);letter-spacing:.13em;text-transform:uppercase}.eyebrow{color:#59584f}.eyebrow::before{content:"—  ";color:var(--blue)}.hero h1{grid-column:1;margin:18px 0 0;font:400 clamp(66px,9vw,132px)/.82 var(--serif);letter-spacing:-.085em}.hero h1 span{display:block;padding-left:clamp(34px,8vw,120px);font-style:italic;color:var(--blue)}.hero p{grid-column:2;grid-row:2;max-width:260px;margin:0 0 4px;color:#5a5953;font:13px/1.75 var(--sans)}
+.grid{grid-template-columns:minmax(330px,.79fr) minmax(0,1.21fr);gap:18px;align-items:stretch}.panel{min-width:0;border:1px solid #34342f;border-radius:4px;overflow:hidden}.cam-panel{padding:18px;background:#20211e;color:#f4f1e9;box-shadow:0 14px 35px #302b1b14}.panel-head{padding:2px 1px 15px;margin:0}.panel-title{color:#f4f1e9}.panel-sub{font:10px var(--sans);color:#a6a79d;margin-top:6px}.pill{padding:8px 10px;border:1px solid #ffffff32;border-radius:2px;color:#deded2;font:9px var(--mono);letter-spacing:.04em;text-transform:uppercase}.statusdot{background:#82837c}.statusdot.live{background:var(--acid);box-shadow:0 0 11px #d9ff5688}
+.camera{aspect-ratio:4/3;border-radius:0;background:#11120f;border:1px solid #ffffff20}.camera video{object-fit:cover;transform:scaleX(-1)}.camera canvas{transform:scaleX(-1)}.camera.photo-active canvas{transform:none}.camera img.photo-preview{object-fit:contain}.cam-placeholder{position:relative;z-index:1;max-width:280px;padding:25px;color:#f4f1e9}.camera.active .cam-placeholder,.camera.photo-active .cam-placeholder{display:none}.camera-icon{display:grid;place-items:center;width:46px;height:46px;margin:0 auto 19px;border:1px solid #d9ff5666;border-radius:50%;color:var(--acid);background:transparent}.cam-placeholder h3{font:italic 25px var(--serif);font-weight:400}.cam-placeholder p{font:11px/1.7 var(--sans);color:#b0b2a8}.corner{width:17px;height:17px;border-color:var(--acid)}
+.controls{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:12px 0 0}.btn{min-height:42px;padding:0 12px;border:1px solid #ffffff36;border-radius:2px;background:transparent;color:#f4f1e9;font:10px var(--mono);transition:.2s}.btn:hover:not(:disabled){border-color:var(--acid);color:var(--acid);transform:translateY(-1px)}.btn.primary{grid-column:1/-1;min-height:48px;border-color:var(--acid);background:var(--acid);color:#1b1b15;font-weight:700}.btn.primary:hover:not(:disabled){background:#e7ff8c;color:#14150d}.btn:disabled{opacity:.38;cursor:not-allowed}.fineprint,.error{margin:12px 1px 0;font:9px/1.6 var(--sans)}.fineprint{color:#9a9d92}.error{color:#ffad9b}
+.results{position:relative;display:flex;flex-direction:column;padding:18px 20px 15px;border:1px solid #34342f;border-radius:4px;background:#f3f0e8;box-shadow:0 14px 35px #302b1b14}.results::before{content:"02";position:absolute;right:19px;bottom:12px;color:#20211e12;font:italic 84px/.8 var(--serif);pointer-events:none}.viz{position:relative;flex:1;min-height:300px;display:grid;place-items:center;overflow:hidden;border:1px solid #34342f;border-radius:0;background:radial-gradient(ellipse at 52% 52%,var(--glow,#6862ff42),transparent 52%),#17181a;transition:background 1s}.viz::before{content:"";position:absolute;width:min(56%,380px);aspect-ratio:1;border:1px solid #ffffff12;border-radius:50%;box-shadow:0 0 0 27px #ffffff05,0 0 0 72px #ffffff03;filter:none;transition:none}.orb{position:relative;z-index:1;width:clamp(170px,25vw,310px);border-radius:44% 56% 63% 37%/44% 38% 62% 56%;background:radial-gradient(ellipse at 29% 20%,#fff9,transparent 24%),linear-gradient(142deg,var(--a,#d5f775),var(--b,#8278ff) 53%,var(--c,#ff785e));filter:drop-shadow(0 22px 48px var(--glow,#7269ff42));animation:morph 13s ease-in-out infinite,float 8s ease-in-out infinite}.orb::before{inset:6%;background:linear-gradient(150deg,#ffffff40,transparent 38%,#05051525 74%)}.orb::after{inset:18% 25%;border:1px solid #ffffff28;border-radius:48%;transform:rotate(-34deg)}.orb2,.orb3{display:block;z-index:1;background:var(--a,#d5f775);filter:blur(1px);opacity:.7;animation:float2 9s ease-in-out infinite}.orb2{width:26px;height:26px;left:calc(50% + 145px);top:calc(50% + 62px)}.orb3{width:12px;height:12px;right:calc(50% + 158px);top:calc(50% - 116px)}.viz-label{bottom:13px;left:14px;color:#d1d0c8;font:9px var(--mono);letter-spacing:.12em}.viz-index{position:absolute;top:13px;right:14px;color:#d1d0c8;font:9px var(--mono)}
+.result-content{position:relative;padding:15px 1px 0;border-top:1px solid var(--line)}.result-top{display:flex;align-items:center;justify-content:space-between;gap:8px}.small-label{color:var(--muted);font-size:9px}.result-top .pill{border-color:#bdbab0;color:#45443d;background:var(--paper)}.expression{margin:11px 0 4px;font:400 clamp(32px,4vw,50px)/.98 var(--serif);letter-spacing:-.055em}.explain{max-width:560px;margin:7px 0 0;color:var(--muted);font:11px/1.6 var(--sans)}.confidence{margin-top:16px}.conf-head{display:flex;justify-content:space-between;margin-bottom:7px;color:var(--muted);font:9px var(--mono);text-transform:uppercase}.track{height:3px;background:#d4d0c4}.fill{background:var(--blue);transition:width .45s}.stats{grid-template-columns:repeat(3,1fr);gap:0;margin-top:15px;border-top:1px solid var(--line)}.stat{padding:10px 7px 0 0;border:0;border-radius:0;background:none}.stat:not(:first-child){padding-left:11px;border-left:1px solid var(--line)}.stat span{color:#8b8981;font:8px var(--mono)}.stat strong{font:600 11px var(--sans)}.result-actions{display:grid;grid-template-columns:1fr auto;gap:8px;margin-top:12px}.result-actions .btn{min-height:36px;border-color:#bab7ac;color:#35342e}.result-actions .btn:hover:not(:disabled){border-color:var(--blue);color:var(--blue)}.result-actions .btn.primary{min-height:36px;grid-column:auto;border-color:var(--ink);background:var(--ink);color:var(--paper)}.privacy{display:flex;gap:9px;margin:13px 1px 0;padding-top:10px;border-top:1px solid var(--line);color:var(--muted);font:9px/1.55 var(--sans)}.privacy b{color:#383731}footer{padding:21px 0 25px;color:var(--muted);font:9px var(--mono)}
+@keyframes morph{0%,100%{border-radius:44% 56% 63% 37%/44% 38% 62% 56%}50%{border-radius:58% 42% 41% 59%/55% 63% 37% 45%}}@keyframes float2{0%,100%{transform:translate(0)}50%{transform:translate(8px,-13px)}}#viz[data-style="1"] .orb{border-radius:50%;filter:saturate(.8) hue-rotate(30deg) drop-shadow(0 22px 48px var(--glow,#7269ff42))}#viz[data-style="2"] .orb{border-radius:35% 65% 57% 43%/43% 40% 60% 57%;filter:saturate(1.35) hue-rotate(125deg) drop-shadow(0 22px 48px var(--glow,#7269ff42))}
+@media(max-width:950px){.shell{width:calc(100% - 48px)}.hero{grid-template-columns:1fr .6fr;padding-top:54px}.hero h1{font-size:clamp(58px,10vw,96px)}.grid{grid-template-columns:minmax(290px,.85fr) minmax(0,1.15fr);gap:12px}.cam-panel,.results{padding:13px}.viz{min-height:260px}.orb{width:clamp(160px,24vw,240px)}.pill{padding:7px 8px;font-size:8px}}
+@media(max-width:700px){.shell{width:calc(100% - 34px)}header{height:62px}.topmeta::before{display:none}.hero{grid-template-columns:1fr;gap:15px;padding:44px 0 31px}.hero h1{font-size:clamp(60px,13vw,90px)}.hero h1 span{padding-left:8vw}.hero p{grid-column:1;grid-row:auto;max-width:390px}.grid{grid-template-columns:1fr;gap:14px}.cam-panel{padding:15px}.camera{aspect-ratio:16/10}.results{min-height:580px;padding:15px}.viz{min-height:330px}.orb{width:min(60vw,255px)}}
+@media(max-width:460px){.shell{width:calc(100% - 24px)}.brand{font-size:13px}.hero{padding-top:38px;gap:13px}.eyebrow{font-size:8px}.hero h1{font-size:clamp(48px,13.2vw,65px);line-height:.91}.hero h1 span{padding-left:5vw}.hero p{font-size:11px}.panel-title{font-size:9px}.panel-sub{font-size:8px}.camera{aspect-ratio:1.08/1}.results{min-height:0;padding:11px}.viz{min-height:275px}.orb{width:190px}.expression{font-size:39px}.explain{font-size:10px}.stat span{font-size:7px}.stat strong{font-size:9px}.result-actions{grid-template-columns:1fr 1fr}.result-actions .btn{font-size:8px;padding:0 5px}.privacy{font-size:8px}footer{display:flex;flex-direction:column;font-size:8px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+.viz::before{background:transparent;filter:none;transition:none}.camera.active .cam-placeholder,.camera.photo-active .cam-placeholder{display:none}header{display:flex;align-items:center;justify-content:space-between}.brand{display:flex;align-items:center}.topmeta{white-space:nowrap}.grid{display:grid}.panel-head{display:flex;align-items:center;justify-content:space-between;gap:10px}.statusdot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:7px}.camera{position:relative;display:grid;place-items:center;overflow:hidden}.camera video,.camera img.photo-preview,.camera canvas{position:absolute;inset:0;width:100%;height:100%}.camera video{display:none;object-fit:cover;transform:scaleX(-1)}.camera.active video{display:block}.camera img.photo-preview{display:none;object-fit:contain}.camera.photo-active img.photo-preview{display:block}.camera canvas{pointer-events:none;transform:scaleX(-1)}.camera.photo-active canvas{transform:none}.corner{position:absolute;z-index:2}.orb{aspect-ratio:1}.orb::before,.orb::after{content:"";position:absolute}.orb2,.orb3{position:absolute}.viz-label{position:absolute}.fill{height:100%;width:0}.stat span{display:block;margin-bottom:5px}.error{display:none}footer{display:flex;justify-content:space-between;gap:16px}</style></head>
+<body>
+<div class="shell">
+<header><div class="brand">MOOD / EXPRESSION LAB</div><div class="topmeta">An experiment in looking closer</div></header>
+<section class="hero"><div class="eyebrow">The expressive field · Study 01</div><h1>Feeling is<br><span>a moving target.</span></h1><p>One face, seven possible signals. Watch a fleeting expression become an evolving field of color. Model estimates are uncertain and never define how you feel.</p></section>
+<main class="grid">
+<section class="panel cam-panel">
+  <div class="panel-head"><div><div class="panel-title">01 — Capture a moment</div><div class="panel-sub">Live camera / local photo study</div></div><div class="pill"><span id="statusdot" class="statusdot"></span><span id="status" aria-live="polite">Camera off</span></div></div>
+  <div class="camera" id="camera">
+    <video id="video" autoplay muted playsinline></video><img id="photo-preview" class="photo-preview" alt="Selected photo for local expression analysis"><canvas id="overlay"></canvas>
+    <div class="cam-placeholder"><div class="camera-icon">✳</div><h3>Enter the frame</h3><p>Find a little light. The camera stays on this device, and analysis begins only when you choose.</p></div>
+    <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+  </div>
+  <div class="controls"><button class="btn primary" id="start">Start camera</button><button class="btn" id="photo-button">Choose photo</button><input id="photo-input" type="file" accept="image/*" hidden><button class="btn" id="stop" disabled>Stop camera</button></div>
+  <div class="fineprint">MODEL LOADS ON FIRST USE · FRAMES STAY IN YOUR BROWSER</div>
+  <div class="error" id="error" role="status"></div>
+</section>
+<section class="panel results">
+  <div class="viz" id="viz" data-style="0">
+    <div class="orb" id="orb"></div><div class="orb2"></div><div class="orb3"></div>
+    <div class="viz-index">MOOD STUDY / <span id="study-index">01</span></div><div class="viz-label" id="viz-label">A field, still forming</div>
+  </div>
+  <div class="result-content">
+    <div class="result-top"><div class="small-label">02 — The signal</div><div class="pill" id="livepill" aria-live="polite">Ready when you are</div></div>
+    <h2 class="expression" id="expression">A face in waiting</h2>
+    <p class="explain" id="explain">Start the camera or choose a photo to explore the expression categories the model can estimate.</p>
+    <div class="confidence"><div class="conf-head"><span>Strongest signal · model score</span><span id="score">—</span></div><div class="track"><div class="fill" id="fill"></div></div></div>
+    <div class="stats">
+      <div class="stat"><span>FACE / 01</span><strong id="face-state">Waiting</strong></div>
+      <div class="stat"><span>SIGNAL / 02</span><strong id="top-state">—</strong></div>
+      <div class="stat"><span>PROCESS / 03</span><strong id="inference-state">Browser</strong></div>
+    </div>
+    <div class="result-actions"><button class="btn" id="style-button" type="button">Change visual style</button><button class="btn primary" id="save-button" type="button">Save visual</button></div>
+  </div>
+  <div class="privacy"><span>✳</span><span><b>Local by design.</b> This score is a model output, not a probability or a reading of inner feeling. Lighting, pose and individual differences change what it sees.</span></div>
+</section>
+</main>
+<footer><span>MOOD / EXPRESSION LAB</span><span>AN OPEN ENDED STUDY · NO RECORDING</span></footer>
+</div>
+<script>
+(() => {
+ const $ = id => document.getElementById(id);
+ const video=$('video'), canvas=$('overlay'), ctx=canvas.getContext('2d'), photo=$('photo-preview');
+ const startBtn=$('start'), stopBtn=$('stop'), photoBtn=$('photo-button'), photoInput=$('photo-input'), errorBox=$('error');
+ let stream=null, running=false, busy=false, timer=null, modelsReady=false, lastDetect=0;
+ const visualStyles=[{name:'Chromatic field / soft',filter:'none'},{name:'Afterimage / cool haze',filter:'hue-rotate(24deg) saturate(1.2)'},{name:'Signal / warm bloom',filter:'hue-rotate(125deg) saturate(1.18)'}];
+ let visualStyleIndex=0;
+ const MODEL_URL='https://cdn.jsdelivr.net/gh/justadudewhohacks/face-api.js@master/weights';
+ let libraryPromise=null;
+ function loadFaceApiLibrary(){
+   if(window.faceapi)return Promise.resolve();
+   if(libraryPromise)return libraryPromise;
+   const sources=[
+     'https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js',
+     'https://unpkg.com/face-api.js@0.22.2/dist/face-api.min.js'
+   ];
+   libraryPromise=(async()=>{
+     const failures=[];
+     for(const src of sources){
+       try{
+         await new Promise((resolve,reject)=>{
+           const script=document.createElement('script');
+           script.src=src;
+           script.onload=()=>window.faceapi?resolve():reject(new Error('The script loaded but faceapi was not initialized.'));
+           script.onerror=()=>reject(new Error('Could not load '+new URL(src).hostname));
+           document.head.appendChild(script);
+         });
+         return;
+       }catch(err){failures.push(err.message);}
+     }
+     throw new Error('Could not load the AI library from either CDN. Tried jsDelivr and unpkg. Check your connection, disable any CDN-blocking extension, or try another network. Details: '+failures.join('; '));
+   })();
+   return libraryPromise;
+ }
+ const palette={
+  happy:['#ffe2a4','#f2a5d7','#9af0d8','#f8b87c35','Bright / buoyant'],
+  sad:['#b9c9f3','#899bce','#b7b1ef','#9aa8ed35','Quiet / muted'],
+  angry:['#ffc08d','#f17e91','#b47df3','#f28a9b35','Warm / intense'],
+  fearful:['#c1b1ff','#7e8de9','#8ce2e4','#9b8cff40','Cool / alert'],
+  disgusted:['#b9e5bd','#8bc8ad','#b8e7dd','#8ad7bc30','Earthy / sharp'],
+  surprised:['#ffe3bb','#c0a1ff','#8ce9e0','#c3a5ff40','Open / bright'],
+  neutral:['#d0c5ff','#8587dc','#8ce2dc','#948cff30','Soft / balanced']
+ };
+ const descriptions={
+  happy:'The model is detecting facial features it associates with a happy expression. A smile can mean many things and does not prove how someone feels.',
+  sad:'The model is detecting features it associates with a sad expression. This is an uncertain visual estimate, not a conclusion about your mood.',
+  angry:'The model is detecting features it associates with an angry expression. Concentration, lighting and other factors can produce similar cues.',
+  fearful:'The model is detecting features it associates with a fearful expression. The result may be wrong, especially with partial or low-light faces.',
+  disgusted:'The model is detecting features it associates with a disgusted expression. Treat this as a model label, not a judgement.',
+  surprised:'The model is detecting features it associates with a surprised expression. Raised eyebrows or an open mouth can have many causes.',
+  neutral:'The model currently assigns the strongest score to neutral facial expression. Neutral does not mean emotionless.'
+ };
+ function status(text,live=false){$('status').textContent=text;$('statusdot').classList.toggle('live',live)}
+ function showError(msg){errorBox.textContent=msg;errorBox.style.display='block'}
+ function clearError(){errorBox.style.display='none';errorBox.textContent=''}
+ function sizeCanvas(source=video){const w=source.videoWidth||source.naturalWidth||640,h=source.videoHeight||source.naturalHeight||480;if(canvas.width!==w||canvas.height!==h){canvas.width=w;canvas.height=h}}
+ async function loadModels(){
+   if(modelsReady)return;
+   $('status').textContent='Loading AI library…';
+   await loadFaceApiLibrary();
+   $('status').textContent='Loading model…';
+   await Promise.all([
+     faceapi.nets.tinyFaceDetector.loadFromUri(MODEL_URL),
+     faceapi.nets.faceExpressionNet.loadFromUri(MODEL_URL)
+   ]);
+   modelsReady=true;
+ }
+ async function start(){
+   clearError();$('camera').classList.remove('photo-active');photo.style.display='none';startBtn.disabled=true;
+   try{
+     status('Loading model…');
+     await loadModels();
+     status('Requesting camera…');
+     stream=await navigator.mediaDevices.getUserMedia({audio:false,video:{facingMode:'user',width:{ideal:640},height:{ideal:480}}});
+     video.srcObject=stream;await video.play();
+     $('camera').classList.add('active');running=true;
+     startBtn.textContent='Camera running';stopBtn.disabled=false;status('Live',true);
+     $('livepill').textContent='Analysing live';$('face-state').textContent='Scanning';
+     sizeCanvas();loop();
+   }catch(err){
+     console.error('MOOD camera start failed:',err);
+    startBtn.disabled=false;startBtn.textContent='Start camera';status('Could not start');
+     const messages={
+       NotAllowedError:'Camera permission was denied. Allow camera access in your browser site settings, then try again.',
+       NotFoundError:'No camera was found. Connect a webcam or try another device.',
+       NotReadableError:'The camera may already be in use by another app. Close that app and retry.',
+       SecurityError:'Camera access requires HTTPS or localhost. Open this page through a local development server.'
+     };
+     showError(messages[err.name]||err.message||'Unable to start the camera. Check browser permissions and network access.');
+     errorBox.scrollIntoView({behavior:'smooth',block:'nearest'});
+   }
+ }
+ async function loop(){
+   if(!running||busy)return;
+   if(!video.videoWidth){timer=setTimeout(loop,250);return}
+   const now=performance.now();
+   if(now-lastDetect<180){timer=setTimeout(loop,80);return}
+   busy=true;lastDetect=now;
+   try{
+     sizeCanvas();
+     const opts=new faceapi.TinyFaceDetectorOptions({inputSize:320,scoreThreshold:.45});
+     const result=await faceapi.detectSingleFace(video,opts).withFaceExpressions();
+     ctx.clearRect(0,0,canvas.width,canvas.height);
+     if(result){
+       const box=result.detection.box;
+       ctx.strokeStyle='rgba(217,255,86,.95)';ctx.lineWidth=Math.max(2,canvas.width/320);
+       ctx.shadowColor='#d9ff56';ctx.shadowBlur=9;ctx.strokeRect(box.x,box.y,box.width,box.height);ctx.shadowBlur=0;
+       const entries=Object.entries(result.expressions).sort((a,b)=>b[1]-a[1]);
+       const [mood,score]=entries[0];
+       render(mood,score);$('face-state').textContent='Detected';
+     }else{
+       $('face-state').textContent='Not found';$('livepill').textContent='Searching';$('viz').classList.remove('has-result');applyVisualStyle();
+       $('expression').textContent='No face detected';$('explain').textContent='Move into view, face the camera, and try even lighting. The model will update when it finds a face.';
+       $('score').textContent='—';$('fill').style.width='0%';$('top-state').textContent='—';
+     }
+   }catch(err){showError('Inference error: '+err.message);stop();return}
+   finally{busy=false}
+   if(running)timer=setTimeout(loop,110);
+ }
+ function applyVisualStyle(){const style=visualStyles[visualStyleIndex];$('viz').dataset.style=String(visualStyleIndex);$('viz-label').textContent=style.name;$('style-button').setAttribute('aria-label','Change visual style. Current style: '+style.name)}
+ function saveVisual(){
+   const orb=$('orb'),colorA=orb.style.getPropertyValue('--a')||'#d1bdf4',colorB=orb.style.getPropertyValue('--b')||'#8c83d1',colorC=orb.style.getPropertyValue('--c')||'#83d9d1',filter=visualStyles[visualStyleIndex].filter;
+   const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1200" viewBox="0 0 1200 1200"><defs><linearGradient id="mood" x1="0" y1="0" x2="1" y2="1"><stop stop-color="${colorA}"/><stop offset=".53" stop-color="${colorB}"/><stop offset="1" stop-color="${colorC}"/></linearGradient><radialGradient id="shine" cx=".25" cy=".18" r=".8"><stop stop-color="#fff" stop-opacity=".64"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient></defs><rect width="1200" height="1200" fill="#09080d"/><g style="filter:${filter}"><path d="M594 138C763 101 1000 294 1033 477c31 170-171 235-252 356-89 133-197 254-367 214-164-39-219-269-185-454C261 409 423 177 594 138Z" fill="url(#mood)"/><path d="M594 138C763 101 1000 294 1033 477c31 170-171 235-252 356-89 133-197 254-367 214-164-39-219-269-185-454C261 409 423 177 594 138Z" fill="url(#shine)"/></g></svg>`;
+   const link=document.createElement('a');link.href=URL.createObjectURL(new Blob([svg],{type:'image/svg+xml'}));link.download='mood-visual.svg';link.click();setTimeout(()=>URL.revokeObjectURL(link.href),1000);
+ }
+ function render(mood,score){
+   const name=mood==='fearful'?'Fearful':mood[0].toUpperCase()+mood.slice(1);
+   const colors=palette[mood]||palette.neutral;
+   const orb=$('orb');orb.style.setProperty('--a',colors[0]);orb.style.setProperty('--b',colors[1]);orb.style.setProperty('--c',colors[2]);orb.style.setProperty('--glow',colors[3]);$('viz').style.setProperty('--glow',colors[3]);
+   $('viz').classList.add('has-result');applyVisualStyle();$('livepill').textContent='Live estimate';$('expression').textContent=name;
+   $('explain').textContent=descriptions[mood]||'The model is estimating this facial-expression category.';
+   $('score').textContent=Math.round(score*100)+'% model score';$('fill').style.width=Math.round(score*100)+'%';$('top-state').textContent=name;
+ }
+ async function analysePhoto(file){
+   clearError(); if(!file)return; startBtn.disabled=true; photoBtn.disabled=true;
+   try{
+     await loadModels();
+     if(running) stop();
+     const url=URL.createObjectURL(file);
+     await new Promise((resolve,reject)=>{photo.onload=resolve;photo.onerror=reject;photo.src=url});
+     $('camera').classList.add('photo-active'); video.style.display='none'; photo.style.display='block';
+     sizeCanvas(photo); ctx.clearRect(0,0,canvas.width,canvas.height);
+     const result=await faceapi.detectSingleFace(photo,new faceapi.TinyFaceDetectorOptions({inputSize:416,scoreThreshold:.4})).withFaceExpressions();
+     if(result){
+       const box=result.detection.box; ctx.strokeStyle='rgba(217,255,86,.95)';ctx.lineWidth=Math.max(2,canvas.width/320);ctx.strokeRect(box.x,box.y,box.width,box.height);
+       const [mood,score]=Object.entries(result.expressions).sort((a,b)=>b[1]-a[1])[0]; render(mood,score); $('face-state').textContent='Photo detected';$('livepill').textContent='Photo analysis';
+     }else{ $('viz').classList.remove('has-result');$('face-state').textContent='Not found';$('livepill').textContent='Photo analysis';$('expression').textContent='No face detected';$('explain').textContent='We could not detect a clear face in this photo. Try a front-facing photo with even lighting.';$('score').textContent='—';$('fill').style.width='0%';$('top-state').textContent='—';applyVisualStyle(); }
+     URL.revokeObjectURL(url); status('Photo analysed');
+   }catch(err){showError('Could not analyse photo: '+(err.message||'unknown error'));}
+  finally{startBtn.disabled=false;photoBtn.disabled=false;startBtn.textContent='Start camera';}
+ }
+ function stop(){
+   running=false;if(timer)clearTimeout(timer);timer=null;
+   if(stream){stream.getTracks().forEach(track=>track.stop());stream=null}
+   video.pause();video.srcObject=null;ctx.clearRect(0,0,canvas.width,canvas.height);
+  $('camera').classList.remove('active');startBtn.disabled=false;startBtn.textContent='Start camera';stopBtn.disabled=true;
+   status('Camera off');$('livepill').textContent='Not analysing';$('face-state').textContent='Stopped';$('inference-state').textContent='Browser';
+ }
+ startBtn.addEventListener('click',start);stopBtn.addEventListener('click',stop);
+ $('style-button').addEventListener('click',()=>{visualStyleIndex=(visualStyleIndex+1)%visualStyles.length;applyVisualStyle()});
+ $('save-button').addEventListener('click',saveVisual);applyVisualStyle();
+ photoBtn.addEventListener('click',()=>photoInput.click());
+ photoInput.addEventListener('change',()=>{const file=photoInput.files&&photoInput.files[0];if(file)analysePhoto(file);photoInput.value='';});
+ window.addEventListener('pagehide',stop);
+ if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){
+   showError('This browser does not expose webcam access here. Use a recent browser and open the page on localhost or HTTPS.');
+ }
+})();
+</script>
+</body>
+</html>
